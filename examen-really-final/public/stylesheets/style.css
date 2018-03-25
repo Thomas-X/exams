@@ -1,0 +1,9 @@
+.page {
+    min-height: 100vh;
+    display:flex;
+    padding: 1rem;
+}
+.verticalCenter {
+    width: 100%;
+    align-self: center;
+}

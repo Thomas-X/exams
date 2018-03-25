@@ -1,0 +1,40 @@
+extends layout
+
+block append head
+    link(rel='stylesheet' href='/stylesheets/login.css')
+
+block content
+    div.page
+        div.verticalCenter
+            div.row.justify-content-md-center
+                div.col-sm-12.col-md-4
+                    h1 Register
+                    form
+                        .form-group
+                            label(for="exampleInputEmail1") Email address
+                            input#exampleInputEmail1.form-control(type="email" aria-describedby="emailHelp" placeholder="Enter email")
+                            small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+                        .form-group
+                            label(for="password1") Password
+                            input#password1.form-control(type="password" placeholder="Password" minlength=8)
+                            small.form-text.text-muted Minimum length is 8 characters
+                        .form-group
+                            label(for="password2") Retype password
+                            input#password2.form-control(type="password" placeholder="Password" minlength=8)
+                        button.btn.btn-primary(type="submit") Submit
+
+    script.
+        var compareForms = function() {
+            var pwd1 = document.getElementById('password1');
+            var pwd2 = document.getElementById('password2');
+            if(pwd1.value !== pwd2.value) {
+                pwd2.setCustomValidity('Passwords must match')
+            }
+            if(pwd1.value === pwd2.value) {
+                pwd2.setCustomValidity('');
+            }
+        };
+
+        window.onload = function() {
+            document.getElementById('password2').onblur = compareForms;
+        }
