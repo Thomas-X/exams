@@ -1,21 +1,63 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import { Footer } from './components/Footer';
+import Contact from './routes/Contact';
+import Login from './routes/Login';
+import Navigation from './components/Navigation';
+import Register from './routes/Register';
+import Home from './routes/Home';
+import styled from 'styled-components';
 
-class App extends Component {
-  render() {
+type RoutesType = {
+    [key: string]: {
+        component: React.ComponentClass | React.SFC,
+        exact: boolean,
+        path: string,
+    }
+};
+
+export const ROUTES: any = {
+    contact: {
+        component: Contact,
+        exact: true,
+        path: '/contact',
+    },
+    home: {
+        component: Home,
+        exact: true,
+        path: '/',
+    },
+    login: {
+        component: Login,
+        exact: true,
+        path: '/login',
+    },
+    register: {
+        component: Register,
+        exact: true,
+        path: '/register',
+    },
+};
+
+const BodyContainer = styled.div`
+    min-height: 90vh;
+    > section {
+        min-height: 90vh;
+    } 
+`;
+
+const App = () => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <div>
+            <Navigation/>
+            <BodyContainer>
+                <Switch>
+                    {Object.keys(ROUTES).map((routeKey, index) => <Route key={index} {...ROUTES[routeKey]}/>)}
+                </Switch>
+            </BodyContainer>
+            <Footer/>
+        </div>
     );
-  }
-}
+};
 
 export default App;
