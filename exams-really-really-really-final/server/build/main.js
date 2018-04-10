@@ -108,7 +108,7 @@ module.exports = require("mongoose");
 var Home = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 Home.get('/', function (req, res) {
-    res.send('hi from home');
+    res.send('hi from api / backend');
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (Home);
@@ -163,11 +163,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_is_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_is_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_mongoose__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__controllers_home__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__factories_createAuthHandler__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__global_constants__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_log__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__socket__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__factories_createAuthHandler__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__global_constants__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_log__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__socket__ = __webpack_require__(26);
 
 
 var _templateObject = _taggedTemplateLiteral(['{bold On your network:}     {underline http://', ':{bold ', '}/}'], ['{bold On your network:}     {underline http://', ':{bold ', '}/}']),
@@ -190,164 +189,161 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 
+
+
 var MONGO_URI = __webpack_require__(23).MONGO_URI;
-
-
 
 __webpack_require__(28).config();
 
 var Server = function Server() {
-	var _this = this;
+    var _this = this;
 
-	_classCallCheck(this, Server);
+    _classCallCheck(this, Server);
 
-	this.onListen = function (err) {
-		if (err) {
-			Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["a" /* error */])('Unable to start server on port ' + _this.port, err);
-			return;
-		}
+    this.onListen = function (err) {
+        if (err) {
+            Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["a" /* error */])('Unable to start server on port ' + _this.port, err);
+            return;
+        }
 
-		if (process.env.__DEV__) {
-			Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["c" /* warn */])('We\'re in development mode.');
-		}
+        if (process.env.__DEV__) {
+            Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["c" /* warn */])('We\'re in development mode.');
+        }
 
-		Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["b" /* info */])('We\'re live.\r\n');
-		Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["b" /* info */])(__WEBPACK_IMPORTED_MODULE_2_chalk___default()(_templateObject, __WEBPACK_IMPORTED_MODULE_6_ip___default.a.address('public'), _this.port.toString()));
-		Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["b" /* info */])(__WEBPACK_IMPORTED_MODULE_2_chalk___default()(_templateObject2, __WEBPACK_IMPORTED_MODULE_6_ip___default.a.address('private'), _this.port.toString()));
-	};
+        Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["b" /* info */])('We\'re live.\r\n');
+        Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["b" /* info */])(__WEBPACK_IMPORTED_MODULE_2_chalk___default()(_templateObject, __WEBPACK_IMPORTED_MODULE_6_ip___default.a.address('public'), _this.port.toString()));
+        Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["b" /* info */])(__WEBPACK_IMPORTED_MODULE_2_chalk___default()(_templateObject2, __WEBPACK_IMPORTED_MODULE_6_ip___default.a.address('private'), _this.port.toString()));
+    };
 
-	this.connectToDb = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee() {
-		var db;
-		return __WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-			while (1) {
-				switch (_context.prev = _context.next) {
-					case 0:
-						_context.prev = 0;
+    this.connectToDb = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var db;
+        return __WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _context.prev = 0;
 
-						__WEBPACK_IMPORTED_MODULE_8_mongoose___default.a.connect(MONGO_URI, {
-							useMongoClient: true
-						});
-						__WEBPACK_IMPORTED_MODULE_8_mongoose___default.a.Promise = global.Promise;
-						db = __WEBPACK_IMPORTED_MODULE_8_mongoose___default.a.connection;
-
-
-						db.on('error', function (err) {
-							console.log();
-							Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["a" /* error */])(err);
-							throw new Error(err);
-						});
-						db.once('open', function () {
-							Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["b" /* info */])('Successfully connected to database!');
-							console.log();
-							_this.start().catch(function (err) {
-								console.log();
-								Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["a" /* error */])(err);
-								throw new Error(err);
-							});
-						});
-						_context.next = 11;
-						break;
-
-					case 8:
-						_context.prev = 8;
-						_context.t0 = _context['catch'](0);
-						throw new Error(_context.t0);
-
-					case 11:
-					case 'end':
-						return _context.stop();
-				}
-			}
-		}, _callee, _this, [[0, 8]]);
-	}));
-	this.start = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2() {
-		var http;
-		return __WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-			while (1) {
-				switch (_context2.prev = _context2.next) {
-					case 0:
-						_this.app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.json());
-						// TODO Change cors to not allow all origins, just frontend location.
-						_this.app.use(__WEBPACK_IMPORTED_MODULE_3_cors__());
-						Object(__WEBPACK_IMPORTED_MODULE_10__factories_createAuthHandler__["b" /* default */])();
-						_this.setRoutes();
-						http = new __WEBPACK_IMPORTED_MODULE_5_http__["Server"](_this.app);
-
-						_this.socket = new __WEBPACK_IMPORTED_MODULE_13__socket__["a" /* default */](http);
-						_this.socket.bindSockets();
-						http.listen(_this.port, _this.onListen);
-
-					case 8:
-					case 'end':
-						return _context2.stop();
-				}
-			}
-		}, _callee2, _this);
-	}));
-
-	this.setRoutes = function () {
-		var _iteratorNormalCompletion = true;
-		var _didIteratorError = false;
-		var _iteratorError = undefined;
-
-		try {
-
-			for (var _iterator = __WEBPACK_IMPORTED_MODULE_11__global_constants__["a" /* ROUTES */][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-				var route = _step.value;
-				var isPrivate = route.isPrivate,
-				    allowedRoles = route.allowedRoles,
-				    path = route.path,
-				    controller = route.controller;
+                        __WEBPACK_IMPORTED_MODULE_8_mongoose___default.a.connect(MONGO_URI, {
+                            useMongoClient: true
+                        });
+                        __WEBPACK_IMPORTED_MODULE_8_mongoose___default.a.Promise = global.Promise;
+                        db = __WEBPACK_IMPORTED_MODULE_8_mongoose___default.a.connection;
 
 
-				if (!__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(isPrivate) || !__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(allowedRoles) || !__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(path) || !__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(controller) || typeof controller !== 'function') {
-					continue;
-				}
+                        db.on('error', function (err) {
+                            console.log();
+                            Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["a" /* error */])(err);
+                            throw new Error(err);
+                        });
+                        db.once('open', function () {
+                            Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["b" /* info */])('Successfully connected to database!');
+                            console.log();
+                            _this.start().catch(function (err) {
+                                console.log();
+                                Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["a" /* error */])(err);
+                                throw new Error(err);
+                            });
+                        });
+                        _context.next = 11;
+                        break;
 
-				var checkRole = function checkRole(req, res, next) {
-					// TODO implement roles. Get user via req.user and check if the role is supported
-					next();
-				};
+                    case 8:
+                        _context.prev = 8;
+                        _context.t0 = _context['catch'](0);
+                        throw new Error(_context.t0);
 
-				// TODO Implement roles
-				if (isPrivate === true && allowedRoles.length === 0) {
-					_this.app.use(path, __WEBPACK_IMPORTED_MODULE_10__factories_createAuthHandler__["a" /* authMiddleware */], controller);
-				} else if (allowedRoles.length > 0 && isPrivate === true) {
-					_this.app.use(path, __WEBPACK_IMPORTED_MODULE_10__factories_createAuthHandler__["a" /* authMiddleware */], checkRole, controller);
-				} else if (isPrivate === false) {
-					_this.app.use(path, controller);
-				}
-			}
-		} catch (err) {
-			_didIteratorError = true;
-			_iteratorError = err;
-		} finally {
-			try {
-				if (!_iteratorNormalCompletion && _iterator.return) {
-					_iterator.return();
-				}
-			} finally {
-				if (_didIteratorError) {
-					throw _iteratorError;
-				}
-			}
-		}
+                    case 11:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, _this, [[0, 8]]);
+    }));
+    this.start = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var http;
+        return __WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _this.app.use(__WEBPACK_IMPORTED_MODULE_1_body_parser___default.a.json());
+                        // TODO Change cors to not allow all origins, just frontend location.
+                        _this.app.use(__WEBPACK_IMPORTED_MODULE_3_cors__());
+                        Object(__WEBPACK_IMPORTED_MODULE_9__factories_createAuthHandler__["b" /* default */])();
+                        _this.setRoutes();
+                        http = new __WEBPACK_IMPORTED_MODULE_5_http__["Server"](_this.app);
 
-		_this.app.use('/', __WEBPACK_IMPORTED_MODULE_9__controllers_home__["a" /* default */]);
+                        _this.socket = new __WEBPACK_IMPORTED_MODULE_12__socket__["a" /* default */](http);
+                        _this.socket.bindSockets();
+                        http.listen(_this.port, _this.onListen);
 
-		// routes from here on are authed(!)
-		_this.app.use(__WEBPACK_IMPORTED_MODULE_10__factories_createAuthHandler__["a" /* authMiddleware */]);
+                    case 8:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, _this);
+    }));
 
-		_this.app.use('/someAuthedRoute', function (req, res) {
-			res.send('hi from authed route');
-		});
-	};
+    this.setRoutes = function () {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
-	this.app = __WEBPACK_IMPORTED_MODULE_4_express___default()();
-	this.port = process.env.PORT || 3004;
-	this.connectToDb().catch(function (err) {
-		return Object(__WEBPACK_IMPORTED_MODULE_12__services_log__["a" /* error */])(err);
-	});
+        try {
+
+            for (var _iterator = __WEBPACK_IMPORTED_MODULE_10__global_constants__["a" /* ROUTES */][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var route = _step.value;
+                var isPrivate = route.isPrivate,
+                    allowedRoles = route.allowedRoles,
+                    path = route.path,
+                    controller = route.controller;
+
+
+                if (!__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(isPrivate) || !__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(allowedRoles) || !__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(path) || !__WEBPACK_IMPORTED_MODULE_7_is_js___default.a.set(controller) || typeof controller !== 'function') {
+                    continue;
+                }
+
+                var checkRole = function checkRole(req, res, next) {
+                    // TODO implement roles. Get user via req.user and check if the role is supported
+                    next();
+                };
+
+                // TODO Implement roles
+                if (isPrivate === true && allowedRoles.length === 0) {
+                    _this.app.use(path, __WEBPACK_IMPORTED_MODULE_9__factories_createAuthHandler__["a" /* authMiddleware */], controller);
+                } else if (allowedRoles.length > 0 && isPrivate === true) {
+                    _this.app.use(path, __WEBPACK_IMPORTED_MODULE_9__factories_createAuthHandler__["a" /* authMiddleware */], checkRole, controller);
+                } else if (isPrivate === false) {
+                    _this.app.use(path, controller);
+                }
+            }
+
+            // Last route, 404 handler
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        _this.app.use('*', function (req, res) {
+            res.status(404).send('Not found');
+        });
+    };
+
+    this.app = __WEBPACK_IMPORTED_MODULE_4_express___default()();
+    this.port = process.env.PORT || 3004;
+    this.connectToDb().catch(function (err) {
+        return Object(__WEBPACK_IMPORTED_MODULE_11__services_log__["a" /* error */])(err);
+    });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (new Server());
@@ -535,33 +531,33 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var Auth = Object(__WEBPACK_IMPORTED_MODULE_2_express__["Router"])();
 
-var validations = [Object(__WEBPACK_IMPORTED_MODULE_3_express_validator_check__["check"])('username').exists().isAlphanumeric(), Object(__WEBPACK_IMPORTED_MODULE_3_express_validator_check__["check"])('password1').exists().isLength({ min: 6 })];
+// Disable validation since who cares about any of that right. 🤷‍
+
+var validations = function validations(req, res, next) {
+    next();
+};
+
+// const validations = [
+//     check('username').exists().isAlphanumeric(),
+//     check('password1').exists().isLength({ min: 6 }),
+// ];
 
 var checkIfValidatorFailed = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res, next) {
-        var errors, message;
         return __WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        errors = Object(__WEBPACK_IMPORTED_MODULE_3_express_validator_check__["validationResult"])(req);
-
-                        if (errors.isEmpty()) {
-                            _context.next = 4;
-                            break;
-                        }
-
-                        message = errors.formatWith(function (_ref2) {
-                            var param = _ref2.param;
-
-                            return 'Invalid ' + param + ' value';
-                        }).array();
-                        return _context.abrupt('return', res.status(422).json({ message: message[message.length - 1] }));
-
-                    case 4:
+                        // const errors = validationResult(req);
+                        // if (!errors.isEmpty()) {
+                        //     const message = errors.formatWith(({ param }) => {
+                        //         return `Invalid ${param} value`;
+                        //     }).array();
+                        //     return res.status(422).json({ message: message[message.length - 1] });
+                        // }
                         next();
 
-                    case 5:
+                    case 1:
                     case 'end':
                         return _context.stop();
                 }
@@ -575,7 +571,7 @@ var checkIfValidatorFailed = function () {
 }();
 
 Auth.post('/register', validations, checkIfValidatorFailed, function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res, next) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res, next) {
         var _req$body, username, password1, user, id, _user;
 
         return __WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
@@ -646,12 +642,12 @@ Auth.post('/register', validations, checkIfValidatorFailed, function () {
     }));
 
     return function (_x4, _x5, _x6) {
-        return _ref3.apply(this, arguments);
+        return _ref2.apply(this, arguments);
     };
 }());
 
 Auth.post('/login', validations, checkIfValidatorFailed, function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res, next) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res, next) {
         var _req$body2, username, password1, user;
 
         return __WEBPACK_IMPORTED_MODULE_0__Users_thomaszwarts_gitrepos_exams_exams_really_really_really_final_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
@@ -711,7 +707,7 @@ Auth.post('/login', validations, checkIfValidatorFailed, function () {
     }));
 
     return function (_x7, _x8, _x9) {
-        return _ref4.apply(this, arguments);
+        return _ref3.apply(this, arguments);
     };
 }());
 

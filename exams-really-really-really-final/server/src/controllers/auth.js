@@ -8,19 +8,26 @@ import User from '../global/models/User';
 
 const Auth = Router();
 
-const validations = [
-    check('username').exists().isAlphanumeric(),
-    check('password1').exists().isLength({ min: 6 }),
-];
+
+// Disable validation since who cares about any of that right. 🤷‍
+
+const validations = (req, res, next) => {
+    next();
+};
+
+// const validations = [
+//     check('username').exists().isAlphanumeric(),
+//     check('password1').exists().isLength({ min: 6 }),
+// ];
 
 const checkIfValidatorFailed = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const message = errors.formatWith(({ param }) => {
-            return `Invalid ${param} value`;
-        }).array();
-        return res.status(422).json({ message: message[message.length - 1] });
-    }
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     const message = errors.formatWith(({ param }) => {
+    //         return `Invalid ${param} value`;
+    //     }).array();
+    //     return res.status(422).json({ message: message[message.length - 1] });
+    // }
     next();
 };
 

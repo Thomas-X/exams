@@ -7,6 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "flowTyped": "flow-typed install",
         "dev": "backpack dev",
+        "start": "backpack dev",
         "seeder": "node ./src/seeder.js",
         "seeder-accept": "node ./src/seeder-accept.js"
     },
